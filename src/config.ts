@@ -10,15 +10,14 @@ export const config = {
   nodeEnv: process.env.NODE_ENV ?? 'development',
   corsOrigins: parseOrigins(process.env.CORS_ORIGINS),
 
-  /** Twilio WhatsApp: From must be approved in Twilio (often whatsapp:+1...) */
-  twilioAccountSid: process.env.TWILIO_ACCOUNT_SID ?? '',
-  twilioAuthToken: process.env.TWILIO_AUTH_TOKEN ?? '',
-  twilioWhatsAppFrom: process.env.TWILIO_WHATSAPP_FROM ?? '',
+  /** Fonnte (Indonesia) — device token from https://fonnte.com dashboard */
+  fonnteToken: process.env.FONNTE_TOKEN ?? '',
+  fonnteApiUrl: process.env.FONNTE_API_URL ?? 'https://api.fonnte.com/send',
 
   /** Only if OTP_DEV_REVEAL=true: response includes debugCode (local testing; never enable in production) */
   otpDevReveal: process.env.OTP_DEV_REVEAL === 'true',
 
   otpMessageTemplate:
     process.env.OTP_MESSAGE_TEMPLATE ??
-    'Alma Cosmetics — رمز التحقق: {{code}} (صالح 5 دقائق)',
+    'Alma Cosmetics — رمز التحقق: {{code}} (صالح 5 دقائق). لا تشاركي هذا الرمز.',
 };

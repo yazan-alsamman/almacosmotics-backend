@@ -25,9 +25,11 @@ npm start
 - `POST /api/auth/request-otp` — body: `{ "name": "...", "phone": "939421195" }` (9 digits, Syria)
 - `POST /api/auth/verify-otp` — body: `{ "phone": "...", "code": "123456" }`
 
-Without Twilio credentials, the OTP is **logged in the terminal** (and optional `OTP_DEV_REVEAL=true` returns `debugCode` in JSON — dev only).
+**Fonnte** ([fonnte.com](https://fonnte.com)) — unofficial WhatsApp gateway; **no Twilio**. The **free “Text Only” plan includes about 1,000 text messages per month** (check current pricing on their site). The **sender number is the WhatsApp account you link to Fonnte** (e.g. company line `0939421195`): connect that phone in the Fonnte dashboard, then copy the device **TOKEN** into `FONNTE_TOKEN` in `.env`. This backend sends with `countryCode=963` for Syrian mobile numbers.
 
-Configure **Twilio WhatsApp** in `.env` (`TWILIO_*`, `TWILIO_WHATSAPP_FROM`) to send real messages from your approved business sender.
+In **production** (`NODE_ENV=production`), OTP requests **fail** until `FONNTE_TOKEN` is set, so users cannot “verify” without a real send path.
+
+In **development**, without `FONNTE_TOKEN`, the OTP is **only logged in the terminal** (optional `OTP_DEV_REVEAL=true` returns `debugCode` in JSON — never enable in production).
 
 ## Remote
 

@@ -15,6 +15,10 @@ function randomOtp6(): string {
 }
 
 authRouter.post('/request-otp', async (req, res) => {
+  if (config.nodeEnv === 'production' && !config.fonnteToken) {
+    return res.status(503).json({ error: 'otp_not_configured' });
+  }
+
   clearExpired();
   const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
   const phoneLocal =
